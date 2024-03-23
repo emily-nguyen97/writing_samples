@@ -14,7 +14,7 @@ Tools:
 - LaTeX for authoring
 - pdflatex for compiling 
 
-*Note: For this portfolio, I learned how to compile LaTeX files in the terminal instead of using Overleaf. I ran the following code:
+*Note: For this portfolio, I learned how to compile LaTeX files in the terminal instead of using Overleaf. I ran the following code:*
 
 ```bash
 # Install pdflatex
