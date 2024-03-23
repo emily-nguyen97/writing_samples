@@ -11,5 +11,16 @@ This section contains my writing from my graduate studies in computational engin
 I wrote a summary for a research paper on augmented neural ordinary differential equations. You can check out the [raw latex file](AcademicWriting/anode_main.tex) and the [pdf](AcademicWriting/anode_main.pdf).
 
 Tools:
-- Latex for authoring
+- LaTeX for authoring
 - pdflatex for compiling 
+
+*Note: For this portfolio, I learned how to compile LaTeX files in the terminal instead of using Overleaf. I ran the following code:
+
+'''bash
+# Install pdflatex
+apt-get update
+apt install texlive-latex-base
+
+# Compile with pdflatex
+pdflatex anode_main.tex
+'''
