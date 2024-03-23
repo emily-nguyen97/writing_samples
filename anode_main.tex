@@ -1,0 +1,87 @@
+\documentclass[letterpaper,12 pt]{article}
+\usepackage{tabularx} % extra features for tabular environment
+\usepackage{amsmath}  % improve math presentation
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{graphicx} % takes care of graphic including machinery
+\usepackage[margin=1in,letterpaper]{geometry} % decreases margins
+\usepackage{cite} % takes care of citations
+\usepackage[final]{hyperref} % adds hyper links inside the generated pdf file
+\hypersetup{
+	colorlinks=true,       % false: boxed links; true: colored links
+	linkcolor=blue,        % color of internal links
+	citecolor=blue,        % color of links to bibliography
+	filecolor=magenta,     % color of file links
+	urlcolor=blue         
+}
+\usepackage{blindtext}
+%++++++++++++++++++++++++++++++++++++++++
+
+
+\begin{document}
+
+\begin{center}
+\Large \textbf{A Summary of \href{https://arxiv.org/pdf/1904.01681.pdf}{Augmented Neural ODEs}}
+
+\vspace{2mm}
+
+\large \textbf{Emily Nguyen}
+\end{center}
+
+\section{Introduction}
+This document provides a summary for a paper on augmented neural ordinary differential equations (NODEs). The assumption is that the audience is familiar with:
+\begin{enumerate}
+    \item Ordinary differential equations (ODEs).
+    \item Neural networks. 
+    \item Linear maps.
+\end{enumerate}
+
+\subsection{Overview}
+NODEs are the continuous equivalent of residual neural networks (ResNets) and provide another way to approximate functions (e.g., for classification, regression, etc). However, there are classes of functions that NODEs cannot represent because ODE trajectories are not allowed to intersect. 
+Additionally, NODEs are afflicted with an increasing number of function evaluations (NFE), which occur during training as the flow gets increasingly complex. The authors claim to have found a solution for NODEs that results in fewer computations, more stability, and better generalization.
+
+\section{NODEs}
+The authors begin with a brief derivation of NODEs. For ResNets, the transformation of a hidden state $\textbf{h}_t\in \mathbb{R}^d$ from one layer to the next is given by 
+\[\textbf{h}_{t+1}=\textbf{h}_t+\textbf{f}_t(\textbf{h}_t)\]
+\noindent where $\textbf{f}_t:\mathbb{R}^d\mapsto \mathbb{R}^d$ is a differentiable function (like a CNN). This has the form of Euler's method to approximate an ODE. This means that if $\Delta t=1$, then $\textbf{h}_t$ can be parametrized by the ODE
+\[\frac{\text{d}\textbf{h}(t)}{\text{d}t}=\textbf{f}(\textbf{h}(t),t), \hspace{5mm} \textbf{h}(0)=\textbf{x}\]
+\noindent where \textbf{x} is the input. The NODE version of a ResNet's forward pass is solving the ODE with input \textbf{x} and adjusting $\textbf{f}(\textbf{h}(t),t)$ so that output \textbf{y} is close to $\textbf{y}_{\text{true}}$.
+
+\vspace{4mm}Let $\phi_t:\mathbb{R}^d\mapsto \mathbb{R}^d$ be the flow of the ODE (i.e., $\phi_t(\textbf{x})=\textbf{h}(t)$), which measures the dependency of the ODE's states on the initial condition \textbf{x}. Then we define the features of the ODE with $\phi(\textbf{x}) \coloneqq \phi_T(\textbf{x})$ where $T$ is the final time. To get an output in $\mathbb{R}$ instead of $\mathbb{R}^d$ (as you would want for classification or regression), define a NODE $g:\mathbb{R}^d\mapsto \mathbb{R}$ such that $g(\boldsymbol{x})=\mathcal{L}(\phi(\boldsymbol{x}))$ and $\mathcal{L}:\mathbb{R}^d \mapsto \mathbb{R}$ where $\mathcal{L}$ is a linear map.
+
+\subsection{Limitations of NODEs} Functions that require the trajectories of the ODE to intersect render the NODEs ineffective in approximating them. 
+
+\subsubsection{ResNet vs NODEs}
+Note that since ResNets are a discretization of ODEs, they can contain discrete jumps through which the trajectories can travel (and avoid intersecting). However, these jumps happen when there are large errors, so we can look at ResNets as ODE solutions with large errors. 
+
+\subsubsection{NODEs Preserve Topology}
+The main issue is encapsulated within \textbf{Proposition 3}, which states that the ``\textit{feature mapping} $\phi(\textbf{x})$ \textit{is a homeomorphism, so the features of Neural ODEs preserve the topology of the input space}". This means that NODEs cannot tear connected regions apart to adequately approximate certain functions (i.e., functions where the features $\phi(\textbf{x})$ for the points are not linearly separable). When NODEs attempt to approximate such functions, the flow gets more complex. This causes the ODE solver to require more steps to evaluate \textbf{f} at each step, which slows down the computation.
+
+\section{Augmented Neural ODEs}
+The solution provided is to augment the space we're in for solving the ODE from $\mathbb{R}^d$ to $\mathbb{R}^{d+p}$ so that the additional dimensions provide the trajectories more space to avoid intersections. The problem looks like
+    \[\frac{\text{d}}{\text{d}t}\begin{bmatrix} \textbf{h}(t)\\ \textbf{a}(t) \end{bmatrix}=\textbf{f}\left( \begin{bmatrix} \textbf{h}(t)\\ \textbf{a}(t) \end{bmatrix},t \right),\hspace{5mm}\begin{bmatrix} \textbf{h}(0)\\ \textbf{a}(0) \end{bmatrix}=\begin{bmatrix} \textbf{x}\\ \textbf{0} \end{bmatrix} \]
+\noindent where $\textbf{a}(t)\in \mathbb{R}^p$ is a point in the augmented space, and every data point \textbf{x} is concatenated with a vector of zeros. This ODE is called an Augmented Neural ODE (ANODE). 
+
+\subsection{Experiments}
+The paper details various experiments to compare the generalization accuracy and performance of various methods. The experiments include:
+	\begin{enumerate}
+	    \item ResNet vs NODEs tested on simple regression tasks (trained on $g(\textbf{x})$ and a linearly separable function) with ResNet outperforming NODEs (see Figure 5)
+	    
+	    \item NODEs vs ANODEs tested on $g$(\textbf{x}) with ANODEs learning simpler flows (see Figure 7), using fewer computations (see Figure 8), and generalizing better (see Figure 9) 
+	    
+	    \item NODEs vs ANODEs tested on MNIST, CIFAR10, SVHN, and 200 classes of $64\times 64$ ImageNet with ANODEs training faster, achieving lower losses, being less computationally expensive, generalizing better and outperforming NODEs even when using the same number of parameters (see Figures 10-12)
+	\end{enumerate}
+
+\noindent The authors try to make ``fair" comparisons between different architectures by running hyperparameter searches for each model and repeating each experiment 20 times, so the experiments appear to be well-designed.	
+
+\section{Conclusion}
+Though running their own experiments to test ANODEs vs ResNets would strengthen their arguments, the experiments that the authors did do are rather convincing. ANODEs appear to perform significantly better than NODEs in every way. However, there are some limitations: 
+\begin{enumerate}
+    \item ANODEs are still slower than ResNets.
+    \item Changing the dimensions of the input space might not be desirable.
+    \item Adding too many channels/dimensions can lead to very unfortunate results (see Figure 12). 
+\end{enumerate}
+
+
+\end{document}
