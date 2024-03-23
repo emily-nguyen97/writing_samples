@@ -1,6 +1,6 @@
 # Writing Samples
 
-Welcome! I'm Emily, and this is my collection of writing samples for technical writing. My readme lists my samples and includes the tools I used for them.
+Welcome! I'm Emily, and this is my collection of writing samples for technical writing. The readme lists my samples and includes the tools I used for them.
 
 # Academic Writing
 
