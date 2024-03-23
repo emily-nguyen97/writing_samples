@@ -16,11 +16,11 @@ Tools:
 
 *Note: For this portfolio, I learned how to compile LaTeX files in the terminal instead of using Overleaf. I ran the following code:
 
-'''bash
+'
 # Install pdflatex
 apt-get update
 apt install texlive-latex-base
 
 # Compile with pdflatex
 pdflatex anode_main.tex
-'''
+'
