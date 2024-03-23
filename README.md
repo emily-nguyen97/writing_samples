@@ -4,7 +4,7 @@ Welcome! I'm Emily, and this is my collection of writing samples for technical w
 
 # Academic Writing
 
-This section contains writing from my time in grad school when I studied computational engineering. 
+This section contains my writing from my graduate studies in computational engineering. 
 
 ## ANODE Summary
 
