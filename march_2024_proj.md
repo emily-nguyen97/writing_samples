@@ -19,6 +19,13 @@ bash Anaconda3-<INSTALLER_VERSION>-Linux-x86_64.sh
 After installing conda, create the environment by running the following code in the terminal:
 
 ```bash
+# Create the environment
 # Replace <ENV_NAME> with a name of your choice
 conda create --name <ENV_NAME>
+
+# Activate the environment
+conda activate <ENV_NAME>
 ```
+The code used here does not specify a python version, so the environment uses the default Python 3.6.9 version.
+
+## Set Up Solutions for Solving the Heat Equation with the Finite Element Method
