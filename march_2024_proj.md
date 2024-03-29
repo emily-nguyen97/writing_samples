@@ -44,7 +44,7 @@ code
 ## Set Up Solutions for Solving the Heat Equation with the Finite Element Method
 
 ### Install and Run FEniCS
-*Note: This installation method is available for Ubuntu.*
+*Note: This installation method is only available for Ubuntu. For instructions on how to install FEniCS for Mac or Windows, follow the instructions [here](https://fenicsproject.org/pub/tutorial/html/._ftut1003.html#___sec5).*
 
 After activating the environment, run:
 
