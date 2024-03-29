@@ -44,12 +44,16 @@ code
 ## Set Up Solutions for Solving the Heat Equation with the Finite Element Method
 
 ### Install and Run FEniCS
+*Note: This installation method is available for Ubuntu.*
+
 After activating the environment, run:
 
 ```bash
-# Install
-curl -s https://get.fenicsproject.org | bash
+# Add the FEniCS package to your repository and update
+sudo add-apt-repository ppa:fenics-packages/fenics
+sudo apt-get update
 
-# Run
-fenicsproject run
+# Install FEniCS and install packages for dependenices of FEniCS
+sudo apt-get install fenics
+sudo apt-get dist-upgrade
 ```
