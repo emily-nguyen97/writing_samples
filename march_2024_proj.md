@@ -1,6 +1,6 @@
-# Set Up Environment (to run in WSL)
+## Set Up Environment (to run in WSL)
 
-## Install anaconda
+### Install conda
 
 Run the following code in the Ubuntu terminal:
 
@@ -12,4 +12,13 @@ curl -O https://repo.anaconda.com/archive/Anaconda3-<INSTALLER_VERSION>-Linux-x8
 
 # Install
 bash Anaconda3-<INSTALLER_VERSION>-Linux-x86_64.sh
+```
+
+### Create Environment
+
+After installing conda, create the environment by running the following code in the terminal:
+
+```bash
+# Replace <ENV_NAME> with a name of your choice
+conda create --name <ENV_NAME>
 ```
