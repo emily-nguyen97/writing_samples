@@ -42,3 +42,14 @@ code
 ```
 
 ## Set Up Solutions for Solving the Heat Equation with the Finite Element Method
+
+### Install and Run FEniCS
+After activating the environment, run:
+
+```bash
+# Install
+curl -s https://get.fenicsproject.org | bash
+
+# Run
+fenicsproject run
+```
