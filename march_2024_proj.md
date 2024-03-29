@@ -28,7 +28,7 @@ conda activate <ENV_NAME>
 ```
 The code used here does not specify a python version, so the environment uses the default Python 3.6.9 version.
 
-### Using Visual Studio Code
+### Open Visual Studio Code
 
 To create a directory for the project and open Visual Studio Code for writing code, run the following code in the terminal:
 
