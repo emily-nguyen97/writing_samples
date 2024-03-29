@@ -58,9 +58,12 @@ To create a directory for the project and open Visual Studio Code for writing co
 # Replace <DIRECTORY_NAME> with a name of your choice
 mkdir <DIRECTORY_NAME>
 
-# Open Visual Studio Code
-code
+# Open Jupyter Notebook
+jupyter notebook
 ```
+
+Running `jupyter notebook` creates one HTML file path and two URLs. Copy and paste one of the URLs or HTML file path into a browser to access Jupyter Notebook.
+
 
 ## Set Up Solutions for Solving the Heat Equation with the Finite Element Method
 
