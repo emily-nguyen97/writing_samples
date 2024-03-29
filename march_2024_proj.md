@@ -47,7 +47,7 @@ sudo apt-get dist-upgrade
 Run:
 
 ```bash
-sudo apt install jupyter-core
+conda install jupyter
 ```
 
 ### Open Jupyter Notebook
