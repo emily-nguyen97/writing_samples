@@ -28,7 +28,29 @@ conda activate <ENV_NAME>
 ```
 The code used here does not specify a python version, so the environment uses the default Python 3.6.9 version.
 
-### Open Visual Studio Code
+### Install FEniCS
+*Note: This installation method is only available for Ubuntu. For instructions on how to install FEniCS for Mac or Windows, follow the instructions [here](https://fenicsproject.org/pub/tutorial/html/._ftut1003.html#___sec5).*
+
+After activating the environment, run:
+
+```bash
+# Add the FEniCS package to your repository and update
+sudo add-apt-repository ppa:fenics-packages/fenics
+sudo apt-get update
+
+# Install FEniCS and install packages for dependenices of FEniCS
+sudo apt-get install fenics
+sudo apt-get dist-upgrade
+```
+
+### Install Jupyter Notebook
+Run:
+
+```bash
+sudo apt install jupyter-core
+```
+
+### Open Jupyter Notebook
 
 To create a directory for the project and open Visual Studio Code for writing code, run the following code in the terminal:
 
@@ -43,17 +65,3 @@ code
 
 ## Set Up Solutions for Solving the Heat Equation with the Finite Element Method
 
-### Install and Run FEniCS
-*Note: This installation method is only available for Ubuntu. For instructions on how to install FEniCS for Mac or Windows, follow the instructions [here](https://fenicsproject.org/pub/tutorial/html/._ftut1003.html#___sec5).*
-
-After activating the environment, run:
-
-```bash
-# Add the FEniCS package to your repository and update
-sudo add-apt-repository ppa:fenics-packages/fenics
-sudo apt-get update
-
-# Install FEniCS and install packages for dependenices of FEniCS
-sudo apt-get install fenics
-sudo apt-get dist-upgrade
-```
