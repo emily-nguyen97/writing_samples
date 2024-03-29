@@ -1,6 +1,7 @@
 ## Set Up Environment (to run in WSL)
 
 ### Install conda
+*Note: These instructions are for installing conda in Linux.*
 
 Run the following code in the Ubuntu terminal:
 
@@ -15,7 +16,6 @@ bash Anaconda3-<INSTALLER_VERSION>-Linux-x86_64.sh
 ```
 
 ### Create Environment
-
 After installing conda, create the environment by running the following code in the terminal:
 
 ```bash
@@ -51,7 +51,6 @@ sudo apt install jupyter-core
 ```
 
 ### Open Jupyter Notebook
-
 To create a directory for the project and open Visual Studio Code for writing code, run the following code in the terminal:
 
 ```bash
