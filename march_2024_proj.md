@@ -2,9 +2,9 @@
 
 ## Problem Statement
 This project uses the finite element method and finite difference method to solve the same partial differential equation (PDE). The PDE is the steady-state heat equation, which uses the following equation:
-\begin{align}
+$\begin{align}
 -k\nabla^2u(x,y)=q(x,y).
-\end{align}
+\end{align}$
 
 ## Set Up Environment (to run in WSL)
 
