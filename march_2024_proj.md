@@ -1,8 +1,20 @@
-# Solving the 2D Steady State Heat Equation
+2D Steady-State Heat Equation Solver
+====================================
+This README assumes that the reader is familiar with partial differential equations, the finite element method, and the finite difference method. 
 
 ## Problem Statement
-This project uses the finite element method and finite difference method to solve the same partial differential equation (PDE). The PDE is the steady-state heat equation, which uses the following equation:
-$$-k\nabla^2u(x,y)=q(x,y).$$
+This project uses both the finite element and finite difference methods to solve the steady-state heat equation, which uses the following equation: $$-k\nabla^2u(x,y)=q(x,y)$$
+where $k$ is the thermal conductivity, $u(x,y)$ is the temperature of the material at location $(x,y)$, and $q(x,y)$ is the heat source.
+
+The problem will be solved for a square domain with dimensions $[0,1]\times[0,1]$, and the boundary conditions are $$u(x,y)=1+x^2+\alpha y^2.$$
+
+## Assumptions
+The assumptions for solving the heat equation are:
+1. The problem has Dirichlet boundary conditions (the ends of the element are held at fixed values).
+2. The mesh spacing is constant.
+3. The mesh spacing is the same in the $x$ and $y$ directions ($\Delta x=\Delta y$).
+4. The thermal conductivity $k$ is constant.
+5. The element is homogeneous.
 
 ## Set Up Environment (to run in WSL)
 
