@@ -29,21 +29,9 @@ conda activate <ENV_NAME>
 The code used here does not specify a python version, so the environment uses the default Python 3.6.9 version.
 
 ### Install FEniCS
-*Note: This installation method is only available for Ubuntu. For instructions on how to install FEniCS for Mac or Windows, follow the instructions [here](https://fenicsproject.org/pub/tutorial/html/._ftut1003.html#___sec5).*
+*Note: This installation method is only available for conda.*
 
 After activating the environment, run:
-
-```bash
-# Add the FEniCS package to your repository and update
-sudo add-apt-repository ppa:fenics-packages/fenics
-sudo apt-get update
-
-# Install FEniCS and install packages for dependenices of FEniCS
-sudo apt-get install fenics
-sudo apt-get dist-upgrade
-```
-
-OR
 
 ```bash
  conda install -c conda-forge fenics
