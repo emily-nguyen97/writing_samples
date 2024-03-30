@@ -50,8 +50,10 @@ In the environment, run in the terminal:
 conda install jupyter
 ```
 
+Close the terminal.
+
 ### Open Jupyter Notebook
-To create a directory for the project and open Jupyter Notebook for writing code, run the following code in the terminal:
+To create a directory for the project and open Jupyter Notebook for writing code, open a terminal and run the following code:
 
 ```bash
 # Make directory
