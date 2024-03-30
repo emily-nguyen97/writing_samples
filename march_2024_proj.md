@@ -37,6 +37,13 @@ After activating the environment, run:
  conda install -c conda-forge fenics
 ```
 
+### Install matplotlib
+In the environment, run in the terminal:
+
+```bash
+conda install -c conda-forge matplotlib
+```
+
 ### Install Jupyter Notebook
 1. In the environment, run in the terminal:
 
