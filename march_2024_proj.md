@@ -57,7 +57,7 @@ Running `jupyter notebook` creates one HTML file path and two URLs. Copy and pas
 
 
 ## Set Up Solutions for Solving the Heat Equation with the Finite Element Method
-The entire code for solving the heat equation using the finite element method is:
+The full code for solving the heat equation using the finite element method is:
 
 ```python
 from fenics import *
@@ -69,7 +69,9 @@ from matplotlib import cm
 k = 0.1
 alpha = 3
 nx, ny = 100,100
+```
 
+```python
 # Create mesh and define function space
 mesh = UnitSquareMesh(nx, ny)
 V = FunctionSpace(mesh, 'CG', 2)
@@ -93,12 +95,15 @@ n = FacetNormal(mesh)
 F = k*dot(grad(u), grad(v))*dx - k*v*dot(grad(u),n)*ds - q*v*dx
 a, L = lhs(F), rhs(F)
 
+```
+
+```python
 # Solve
 u = Function(V)
 solve(a == L, u, bc)
+```
 
-# Plot
-
+```python
 # Add a function for triangulating the solution given by FEniCS
 def mesh2triang(mesh):
     import matplotlib.tri as tri
@@ -117,3 +122,114 @@ plt.savefig('heateqFEM.png')
 plt.show()
 ```
 
+## Set Up Solutions for Solving the Heat Equation with the Finite Difference Method
+The full code for solving the heat equation using the finite difference method is:
+
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+from matplotlib import cm
+
+# Set up parameters
+num_steps = 100
+dx = 1.0/num_steps
+n = (num_steps+1)*(num_steps+1)
+k = 0.1
+alpha = 3
+
+# Boundary is u(x,y) = 1 + x^2 + alpha*y^2
+def bc(x, y):
+    return 1 + x*x + alpha*y*y
+```
+
+```python
+# Set up matrix A
+nx = int(np.sqrt(n))
+X = np.linspace(0.0,1.0,nx)
+Y = np.linspace(0.0,1.0,nx)
+A = np.zeros((n, n))
+
+# Set up boundary terms
+for i in range(nx):
+    # Top and bottom boundaries
+    A[i,i] = 1.0
+    A[i+nx*(nx-1),i+nx*(nx-1)] = 1.0
+
+    # Left and right boundaries
+    A[i*nx,i*nx] = 1.0
+    A[nx-1+nx*i,nx-1+nx*i] = 1.0
+
+# Set up inner nodes
+for i in range(1,nx-1):
+    for j in range(1,nx-1):
+        A[i+j*nx,i+j*nx] = -4.0
+        A[i+j*nx,i+j*nx-1] = 1.0
+        A[i+j*nx,i+j*nx+1] = 1.0
+        A[i+j*nx,i+j*nx-nx] = 1.0
+        A[i+j*nx,i+j*nx+nx] = 1.0
+```
+
+```python
+# Set up vector b
+factor = -dx*dx/k
+sourceval = -k*(2+2*alpha)
+nx = int(np.sqrt(n))
+b = np.zeros((n,1))
+
+tempy1 = 0.0
+tempy2 = 1.0
+
+# Set boundary with Dirichlet conditions
+for i in range(nx):
+    # Bottom row of boundary, where j=0, 0<=i<nx so idx=i+nx*j=i
+    tempx1 = i*dx
+    b[i] = bc(tempx1, tempy1)
+    
+    # Top row of boundary, where j=nx-1, 0<=i<nx so idx=i+nx*j=i+nx*(nx-1)
+    idx = i+nx*(nx-1)
+    b[idx] = bc(tempx1, tempy2)
+
+    # Left most boundary, where 0<=j<nx, i=0 so idx=i+nx*j=nx*j
+    idx = i*nx
+    b[idx] = bc(tempy1, tempx1)
+
+    # Right most boundary, where 0<=j<nx, i=nx-1 so idx=i+nx*j=nx-1+nx*j
+    idx = nx-1+nx*i
+    b[idx] = bc(tempy2, tempx1)
+
+# Set source term for every other node
+for i in range(1,nx-1):
+    tempx1 = i*dx
+    for j in range(1,nx-1):
+        idx = i+nx*j
+        b[idx] = factor*sourceval
+```
+
+```python
+sol = np.linalg.solve(A,b)
+```
+
+```python
+# Set up mesh for plotting
+nvis = 101
+arr = np.zeros((nvis,nvis))
+
+for i in range(nvis):
+    for j in range(nvis):
+        idx = i+nvis*j
+        arr[i,j] = sol[idx]
+
+x = np.linspace(0.0-dx,1.0+dx,101)
+y = np.linspace(0.0-dx,1.0+dx,101)
+
+[X,Y] = np.meshgrid(x,y)
+
+# Plot
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+ax.set_ylim(0,1)
+ax.set_xlim(1,0)
+ax.view_init(30,30)
+ax.plot_surface(X,Y,arr,cmap=cm.plasma)
+plt.savefig('heateqFD.png')
+```
