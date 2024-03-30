@@ -16,7 +16,9 @@ The assumptions for solving the heat equation are:
 4. The thermal conductivity $k$ is constant.
 5. The element is homogeneous.
 6. The mesh for the finite difference method follows this structure:
-<p>![2D Mesh](Images/heatequation2dmesh.png)</p>
+<p align="center">
+  <img src="https://github.com/emily-nguyen97/writing_samples/blob/main/Images/heatequation2dmesh.png" alt="drawing" width="600"/>
+</p>
 
 ## Set Up Environment (to run in WSL)
 
