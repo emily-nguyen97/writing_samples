@@ -43,6 +43,12 @@ sudo apt-get install fenics
 sudo apt-get dist-upgrade
 ```
 
+OR
+
+```bash
+ conda install -c conda-forge fenics
+```
+
 ### Install Jupyter Notebook
 1. In the environment, run in the terminal:
 
