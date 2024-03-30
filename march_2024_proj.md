@@ -58,6 +58,7 @@ To create a directory for the project and open Jupyter Notebook for writing code
 ```bash
 # Make directory
 # Replace <DIRECTORY_NAME> with a name of your choice
+conda activate <ENV_NAME>
 mkdir <DIRECTORY_NAME>
 
 # Open Jupyter Notebook
