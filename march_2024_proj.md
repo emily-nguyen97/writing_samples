@@ -1,7 +1,10 @@
 # Solving the 2D Steady State Heat Equation
 
 ## Problem Statement
-This project uses the finite element method and finite difference method to solve the same partial differential equation (PDE). The PDE is $-k\grad^2u(x,y)=q(x,y)$.
+This project uses the finite element method and finite difference method to solve the same partial differential equation (PDE). The PDE is the steady-state heat equation, which uses the following equation:
+\[
+  \makebox[\linewidth]{-k\nabla^2u(x,y)=q(x,y).}
+\]
 
 ## Set Up Environment (to run in WSL)
 
