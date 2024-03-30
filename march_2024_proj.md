@@ -44,13 +44,13 @@ sudo apt-get dist-upgrade
 ```
 
 ### Install Jupyter Notebook
-In the environment, run in the terminal:
+1. In the environment, run in the terminal:
 
 ```bash
 conda install jupyter
 ```
 
-Close the terminal.
+2. Close the terminal.
 
 ### Open Jupyter Notebook
 To create a directory for the project and open Jupyter Notebook for writing code, open a terminal and run the following code:
