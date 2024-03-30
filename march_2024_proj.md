@@ -44,14 +44,14 @@ sudo apt-get dist-upgrade
 ```
 
 ### Install Jupyter Notebook
-Run:
+In the environment, run in the terminal:
 
 ```bash
 conda install jupyter
 ```
 
 ### Open Jupyter Notebook
-To create a directory for the project and open Visual Studio Code for writing code, run the following code in the terminal:
+To create a directory for the project and open Jupyter Notebook for writing code, run the following code in the terminal:
 
 ```bash
 # Make directory
