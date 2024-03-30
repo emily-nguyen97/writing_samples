@@ -15,6 +15,7 @@ The assumptions for solving the heat equation are:
 3. The mesh spacing is the same in the $x$ and $y$ directions ($\Delta x=\Delta y$).
 4. The thermal conductivity $k$ is constant.
 5. The element is homogeneous.
+6. The mesh for the finite difference method follows this structure: ![2D Mesh for Finite Difference Method](Images/heatequation2dmesh.png)
 
 ## Set Up Environment (to run in WSL)
 
