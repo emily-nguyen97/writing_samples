@@ -7,8 +7,7 @@ Run the following code in the Ubuntu terminal:
 
 ```bash
 # Download the installer
-# Replace <INSTALLER_VERSION> with the version you would like
-# For this project, I used 2024.02-1
+# Replace <INSTALLER_VERSION> with the version you would like (I used 2024.02-1)
 curl -O https://repo.anaconda.com/archive/Anaconda3-<INSTALLER_VERSION>-Linux-x86_64.sh
 
 # Install
@@ -20,8 +19,9 @@ After installing conda, create the environment by running the following code in 
 
 ```bash
 # Create the environment
-# Replace <ENV_NAME> with a name of your choice
-conda create --name <ENV_NAME>
+# Replace <ENV_NAME> with a name of your choice (I used "heatequationenv")
+# Replace <PYTHON_VERSION> with a version of your choice (I used 3.12.2)
+conda create -n <ENV_NAME> python=<PYTHON_VERSION>
 
 # Activate the environment
 conda activate <ENV_NAME>
