@@ -1,3 +1,8 @@
+# Solving the 2D Steady State Heat Equation
+
+## Problem Statement
+This project uses the finite element method and finite difference method to solve the same partial differential equation (PDE). The PDE is $-k\grad^2u(x,y)=q(x,y)$.
+
 ## Set Up Environment (to run in WSL)
 
 ### Install conda
@@ -145,8 +150,6 @@ def bc(x, y):
 ```python
 # Set up matrix A
 nx = int(np.sqrt(n))
-X = np.linspace(0.0,1.0,nx)
-Y = np.linspace(0.0,1.0,nx)
 A = np.zeros((n, n))
 
 # Set up boundary terms
