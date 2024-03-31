@@ -1,14 +1,17 @@
 2D Steady-State Heat Equation Solver
 ====================================
+
 This README assumes that the reader is familiar with partial differential equations, the finite element method, and the finite difference method. 
 
 ## Problem Statement
+
 This project uses both the finite element and finite difference methods to solve the steady-state heat equation, which uses the following equation: $$-k\nabla^2u(x,y)=q(x,y)$$
 where $k$ is the thermal conductivity, $u(x,y)$ is the temperature of the material at location $(x,y)$, and $q(x,y)$ is the heat source.
 
-The problem will be solved for a square domain with dimensions $[0,1]\times[0,1]$, and the boundary conditions are $$u(x,y)=xy\cos(x)\cos(y).$$
+The problem will be solved for a square domain with dimensions $[0,1]\times[0,1]$, and the boundary conditions are $$u(x,y)=xy\cos(4x)\cos(4y).$$
 
 ## Assumptions
+
 The assumptions for solving the heat equation are:
 1. The problem has Dirichlet boundary conditions (the ends of the element are held at fixed values).
 2. The mesh spacing is constant.
@@ -23,6 +26,7 @@ The assumptions for solving the heat equation are:
 ## Set Up Environment (to run in WSL)
 
 ### Install conda
+
 > [!NOTE]
 > These instructions are for installing conda in Linux.
 
@@ -38,6 +42,7 @@ bash Anaconda3-<INSTALLER_VERSION>-Linux-x86_64.sh
 ```
 
 ### Create Environment
+
 After installing conda, create the environment by running the following code in the terminal:
 
 ```bash
@@ -51,6 +56,7 @@ conda activate <ENV_NAME>
 ```
 
 ### Install FEniCS, matplotlib, and Jupyter Notebook
+
 > [!NOTE]
 > This installation method is only available for conda.
 
@@ -65,6 +71,7 @@ conda install jupyter
 2. Close the terminal.
 
 ### Open Jupyter Notebook
+
 To create a directory for the project and open Jupyter Notebook for writing code, open a terminal and run the following code:
 
 ```bash
@@ -80,8 +87,12 @@ jupyter notebook
 Running `jupyter notebook` creates one HTML file path and two URLs. Copy and paste one of the URLs or HTML file path into a browser to access Jupyter Notebook (with WSL).
 
 
-## Set Up Solutions for Solving the Heat Equation with the Finite Element Method
-The full code for solving the heat equation using the finite element method is:
+## Set Up Solutions 
+
+### Solve the Heat Equation with the Finite Element Method
+
+<details>
+<summary>The full code for solving the heat equation using the finite element method:</summary>
 
 ```python
 from fenics import *
@@ -101,9 +112,9 @@ mesh = UnitSquareMesh(nx, ny)
 V = FunctionSpace(mesh, 'CG', 2)
 
 # Define boundary conditions
-# Boundary conditions will be u(x,y) = 1+x^2+alpha*y^2
-u_D = Expression('1 + x[0]*x[0] + alpha*x[1]*x[1]', 
-                degree=2, alpha=alpha)
+# Boundary conditions will be u(x,y) = xycos(4x)cos(4y)
+u_D = Expression('x[0]*x[1]*cos(4*x[0])*cos(4*x[1])',
+                  element=V.ufl_element())
 
 def boundary(x, on_boundary):
     return on_boundary
@@ -114,7 +125,8 @@ bc = DirichletBC(V, u_D, boundary)
 # Define variational problem
 u = TrialFunction(V)
 v = TestFunction(V)
-q = Constant(-k*(2+2*alpha))
+q = Expression('8*k*(x[1]*cos(4*x[1])*sin(4*x[0])+x[0]*cos(4*x[0])*(4*x[1]*cos(4*x[1])+sin(4*x[1])))',
+                element=V.ufl_element(), k=k)
 n = FacetNormal(mesh)
 F = k*dot(grad(u), grad(v))*dx - k*v*dot(grad(u),n)*ds - q*v*dx
 a, L = lhs(F), rhs(F)
@@ -145,9 +157,12 @@ surf = ax.plot_trisurf(mesh2triang(mesh2), C, cmap = cm.plasma)
 plt.savefig('heateqFEM.png')
 plt.show()
 ```
+</details>
 
-## Set Up Solutions for Solving the Heat Equation with the Finite Difference Method
-The full code for solving the heat equation using the finite difference method is:
+### Solve the Heat Equation with the Finite Difference Method
+
+<details>
+<summary>The full code for solving the heat equation using the finite difference method:</summary>
 
 ```python
 import numpy as np
@@ -161,9 +176,9 @@ n = (num_steps+1)*(num_steps+1)
 k = 0.1
 alpha = 3
 
-# Boundary is u(x,y) = 1 + x^2 + alpha*y^2
+# Boundary is u(x,y) = xycos(4x)cos(4y)
 def bc(x, y):
-    return 1 + x*x + alpha*y*y
+    return x*y*np.cos(4*x)*np.cos(4*y)
 ```
 
 ```python
@@ -194,7 +209,9 @@ for i in range(1,nx-1):
 ```python
 # Set up vector b
 factor = -dx*dx/k
-sourceval = -k*(2+2*alpha)
+def sourceval(x,y):
+    # Define the source term q(x,y)
+    return 8*k*(y*np.cos(4*y)*np.sin(4*x)+x*np.cos(4*x)*(4*y*np.cos(4*y)+np.sin(4*y)))
 nx = int(np.sqrt(n))
 b = np.zeros((n,1))
 
@@ -223,8 +240,9 @@ for i in range(nx):
 for i in range(1,nx-1):
     tempx1 = i*dx
     for j in range(1,nx-1):
+        tempy1 = j*dx
         idx = i+nx*j
-        b[idx] = factor*sourceval
+        b[idx] = factor*sourceval(tempx1,tempy1)
 ```
 
 ```python
@@ -255,3 +273,4 @@ ax.view_init(30,30)
 ax.plot_surface(X,Y,arr,cmap=cm.plasma)
 plt.savefig('heateqFD.png')
 ```
+</details>
