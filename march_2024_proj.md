@@ -23,7 +23,8 @@ The assumptions for solving the heat equation are:
 ## Set Up Environment (to run in WSL)
 
 ### Install conda
-*Note: These instructions are for installing conda in Linux.*
+> [!NOTE]
+> These instructions are for installing conda in Linux.
 
 Run the following code in the Ubuntu terminal:
 
@@ -50,7 +51,8 @@ conda activate <ENV_NAME>
 ```
 
 ### Install FEniCS, matplotlib, and Jupyter Notebook
-*Note: This installation method is only available for conda.*
+> [!NOTE]
+> This installation method is only available for conda.
 
 1. After activating the environment, run in the terminal:
 
