@@ -25,7 +25,7 @@ The assumptions for solving the heat equation are:
 
 ## Set Up Environment (to run in WSL)
 
-### Install conda
+### Step 1: Install conda
 
 > [!NOTE]
 > These instructions are for installing conda in Linux.
@@ -41,7 +41,7 @@ curl -O https://repo.anaconda.com/archive/Anaconda3-<INSTALLER_VERSION>-Linux-x8
 bash Anaconda3-<INSTALLER_VERSION>-Linux-x86_64.sh
 ```
 
-### Create Environment
+### Step 2: Create Environment
 
 After installing conda, create the environment by running the following code in the terminal:
 
@@ -55,7 +55,7 @@ conda create -n <ENV_NAME> python=<PYTHON_VERSION>
 conda activate <ENV_NAME>
 ```
 
-### Install FEniCS, matplotlib, and Jupyter Notebook
+### Step 3: Install FEniCS, matplotlib, and Jupyter Notebook
 
 > [!NOTE]
 > This installation method is only available for conda.
@@ -65,12 +65,12 @@ conda activate <ENV_NAME>
 ```bash
 conda install -c conda-forge fenics
 conda install -c conda-forge matplotlib
-conda install jupyter
+conda install -c conda-forge jupyter
 ```
 
 2. Close the terminal.
 
-### Open Jupyter Notebook
+### Step 4: Open Jupyter Notebook
 
 To create a directory for the project and open Jupyter Notebook for writing code, open a terminal and run the following code:
 
