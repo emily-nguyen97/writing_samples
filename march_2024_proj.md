@@ -19,6 +19,7 @@ The assumptions for solving the heat equation are:
 4. The thermal conductivity $k$ is constant.
 5. The element is homogeneous.
 6. The mesh for the finite difference method follows this structure:
+   
 <p align="center">
   <img src="https://github.com/emily-nguyen97/writing_samples/blob/main/Images/heatequation2dmesh.png" alt="drawing" width="600"/>
 </p>
@@ -159,6 +160,12 @@ plt.show()
 ```
 </details>
 
+The solution for the finite element method looks like:
+
+<p align="center">
+  <img src="https://github.com/emily-nguyen97/writing_samples/blob/main/Images/heateqFEMtrig.png" width="600"/>
+</p>
+
 ### Solve the Heat Equation with the Finite Difference Method
 
 <details>
@@ -274,3 +281,9 @@ ax.plot_surface(X,Y,arr,cmap=cm.plasma)
 plt.savefig('heateqFD.png')
 ```
 </details>
+
+The solution for the finite difference method looks like:
+
+<p align="center">
+  <img src="https://github.com/emily-nguyen97/writing_samples/blob/main/Images/heateqFDtrig.png" width="600"/>
+</p>
