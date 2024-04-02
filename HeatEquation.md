@@ -5,7 +5,7 @@ This README assumes that the reader is familiar with partial differential equati
 
 ## Problem Statement
 
-This project uses both the finite element and finite difference methods to solve the steady-state heat equation, which uses the following equation: $$-k\nabla^2u(x,y)=q(x,y)$$
+This project uses both the finite element and finite difference methods to solve the 2D steady-state heat equation, which uses the following equation: $$-k\nabla^2u(x,y)=q(x,y)$$
 where $k$ is the thermal conductivity, $u(x,y)$ is the temperature of the material at location $(x,y)$, and $q(x,y)$ is the heat source.
 
 The problem will be solved for a square domain with dimensions $[0,1]\times[0,1]$, and the boundary conditions are $$u(x,y)=xy\cos(4x)\cos(4y).$$
@@ -18,7 +18,7 @@ The assumptions for solving the heat equation are:
 3. The mesh spacing is the same in the $x$ and $y$ directions ($\Delta x=\Delta y$).
 4. The thermal conductivity $k$ is constant.
 5. The element is homogeneous.
-6. The mesh for the finite difference method follows this structure:
+6. The mesh for the finite difference method has the following structure:
    
 <p align="center">
   <img src="https://github.com/emily-nguyen97/writing_samples/blob/main/Images/heatequation2dmesh.png" alt="drawing" width="600"/>
