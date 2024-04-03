@@ -215,9 +215,9 @@ for i in range(1,nx-1):
 ```python
 # Set up vector b
 factor = -dx*dx/k
-def sourceval(x,y):
-    # Define the source term q(x,y)
-    return -k*(2+2*alpha)
+
+# Define the source term q(x,y)
+sourceval = -k*(2+2*alpha)
 nx = int(np.sqrt(n))
 b = np.zeros((n,1))
 
@@ -248,7 +248,7 @@ for i in range(1,nx-1):
     for j in range(1,nx-1):
         tempy1 = j*dx
         idx = i+nx*j
-        b[idx] = factor*sourceval(tempx1,tempy1)
+        b[idx] = factor*sourceval
 ```
 
 ```python
