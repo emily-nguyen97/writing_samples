@@ -6,9 +6,9 @@ This README assumes that the reader is familiar with partial differential equati
 ## Problem Statement
 
 This project uses both the finite element and finite difference methods to solve the 2D steady-state heat equation, which uses the following equation: $$-k\nabla^2u(x,y)=q(x,y)$$
-where $k$ is the thermal conductivity, $u(x,y)$ is the temperature of the material at location $(x,y)$, and $q(x,y)$ is the heat source.
+where $k$ is the thermal conductivity, $u(x,y)$ is the temperature of the material at location $(x,y)$, and $q(x,y)$ is the heat source. The heat source is defined by $$q(x,y)=-k(2+2\alpha).$$
 
-The problem will be solved for a square domain with dimensions $[0,1]\times[0,1]$, and the boundary conditions are $$u_D(x,y)=xy\cos(4x)\cos(4y).$$
+The problem will be solved for a square domain with dimensions $[0,1]\times[0,1]$, and the boundary conditions are $$u_D(x,y)=xy\cos(4x)\cos(4y).$$ 
 
 ## Assumptions
 
@@ -126,8 +126,7 @@ bc = DirichletBC(V, u_D, boundary)
 # Define variational problem
 u = TrialFunction(V)
 v = TestFunction(V)
-q = Expression('8*k*(x[1]*cos(4*x[1])*sin(4*x[0])+x[0]*cos(4*x[0])*(4*x[1]*cos(4*x[1])+sin(4*x[1])))',
-                element=V.ufl_element(), k=k)
+q = Constant(-k*(2+2*alpha))
 n = FacetNormal(mesh)
 F = k*dot(grad(u), grad(v))*dx - k*v*dot(grad(u),n)*ds - q*v*dx
 a, L = lhs(F), rhs(F)
@@ -163,7 +162,7 @@ plt.show()
 The solution for the finite element method looks like:
 
 <p align="center">
-  <img src="https://github.com/emily-nguyen97/writing_samples/blob/main/Images/heateqFEMtrig.png" width="600"/>
+  <img src="https://github.com/emily-nguyen97/writing_samples/blob/main/Images/heateqFEMconst.png" width="600"/>
 </p>
 
 ### Solve the Heat Equation with the Finite Difference Method
@@ -218,7 +217,7 @@ for i in range(1,nx-1):
 factor = -dx*dx/k
 def sourceval(x,y):
     # Define the source term q(x,y)
-    return 8*k*(y*np.cos(4*y)*np.sin(4*x)+x*np.cos(4*x)*(4*y*np.cos(4*y)+np.sin(4*y)))
+    return -k*(2+2*alpha)
 nx = int(np.sqrt(n))
 b = np.zeros((n,1))
 
@@ -285,5 +284,5 @@ plt.savefig('heateqFD.png')
 The solution for the finite difference method looks like:
 
 <p align="center">
-  <img src="https://github.com/emily-nguyen97/writing_samples/blob/main/Images/heateqFDtrig.png" width="600"/>
+  <img src="https://github.com/emily-nguyen97/writing_samples/blob/main/Images/heateqFDconst.png" width="600"/>
 </p>
