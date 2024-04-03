@@ -6,7 +6,7 @@ This document assumes that the reader is familiar with partial differential equa
 ## Problem Statement
 
 This project uses both the finite element and finite difference methods to solve the 2D steady-state heat equation, which uses the following equation: $$-k\nabla^2u(x,y)=q(x,y)$$
-where $k$ is the thermal conductivity, $u(x,y)$ is the temperature of the material at location $(x,y)$, and $q(x,y)$ is the heat source. The heat source is defined by $$q(x,y)=-k(2+2\alpha).$$
+where $k$ is the thermal conductivity, $u(x,y)$ is the temperature of the material at location $(x,y)$, and $q(x,y)$ is the heat source. The heat source is defined by $$q(x,y)=-k(2+2\alpha),$$ where $\alpha$ is a specified constant.
 
 The problem will be solved for a square domain with dimensions $[0,1]\times[0,1]$, and the boundary conditions are $$u_\text{D}(x,y)=xy\cos(4x)\cos(4y).$$ 
 
