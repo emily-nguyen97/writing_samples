@@ -1,7 +1,7 @@
 2D Steady-State Heat Equation Solver
 ====================================
 
-This README assumes that the reader is familiar with partial differential equations, the finite element method, and the finite difference method. 
+This document assumes that the reader is familiar with partial differential equations, the finite element method, and the finite difference method. 
 
 ## Problem Statement
 
