@@ -24,7 +24,7 @@ The assumptions for solving the heat equation are:
   <img src="https://github.com/emily-nguyen97/writing_samples/blob/main/Images/heatequation2dmesh.png" alt="drawing" width="600"/>
 </p>
 
-## Set Up Environment (to run in WSL)
+## Set Up Environment (for WSL)
 
 ### Step 1: Install conda
 
