@@ -8,7 +8,7 @@ This section contains my person technical writing projects.
 
 ## Heat Equation Project Documentation
 
-For this project, I solved the 2D steady-state heat equation using the finite element and finite difference methods. I documented the process for setting up the environment in WSL for running the code, and I also displayed my code and results. Check out the documention [here](HeatEquation.md).
+For this project, I solved the 2D steady-state heat equation using the finite element and finite difference methods. I documented the process for setting up the environment in WSL to run the code, and I also displayed my code and results. Check out the documention [here](HeatEquation.md).
 
 Tools:
 - Vim and Markdown for authoring
