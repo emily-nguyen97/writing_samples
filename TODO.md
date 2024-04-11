@@ -11,12 +11,12 @@
   - [ ] Implementation details in Python (why use FEniCS)
   - [ ] Code structure
   - [ ] Key functions and variables
-  - [ ] Example code
+  - [x] Example code
 - [ ] FDM
   - [ ] Description of FDM approach
   - [ ] Discretizing heat equation with FDM
   - [ ] Implementation details in Python
   - [ ] Code structure
   - [ ] Key functions and variables
-  - [ ] Example code
+  - [x] Example code
 - [ ] Compare the solution images for FDM and FEM
