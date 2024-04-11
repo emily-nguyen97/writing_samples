@@ -15,7 +15,7 @@ The problem will be solved for a square domain with dimensions $[0,1]\times[0,1]
 The assumptions for solving the heat equation are:
 1. The problem has Dirichlet boundary conditions (the ends of the element are held at fixed values).
 2. The mesh spacing is constant.
-3. The mesh spacing is the same in the $x$ and $y$ directions ($\Delta x=\Delta y$).
+3. The mesh spacing is the same in the $x$- and $y$-directions ($\Delta x=\Delta y$).
 4. The thermal conductivity $k$ is constant.
 5. The element is homogeneous.
 6. The mesh for the finite difference method has the following structure:
@@ -105,8 +105,8 @@ Running `jupyter notebook` creates one HTML file path and two URLs. Copy and pas
 The parameters are:
 - k: Thermal conductivity.
 - alpha: Specified constant.
-- nx: Number of grid points along the x-direction.
-- ny: Number of grid points along the y-direction.
+- nx: Number of grid points along the $x$-direction.
+- ny: Number of grid points along the $y$-direction.
 
 <details>
 <summary>The full code for solving the heat equation using the finite element method:</summary>
@@ -195,7 +195,7 @@ The solution for the finite element method looks like:
 ### Solve the Heat Equation with the Finite Difference Method
 
 The parameters are:
-- num_steps: Number of discretized steps in the x and y-directions.
+- num_steps: Number of discretized steps in the $x$- and $y$-directions.
 - dx: Grid spacing.
 - n: Dimension for the matrix A and vector b.
 - k: Thermal conductivity.
