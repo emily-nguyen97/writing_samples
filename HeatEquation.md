@@ -5,7 +5,7 @@ This document assumes that the reader is familiar with partial differential equa
 
 ## Problem Statement
 
-This project uses both the finite element and finite difference methods to solve the 2D steady-state heat equation, which uses the following equation: $$-k\nabla^2u(x,y)=q(x,y)$$
+This project uses both the finite element (FEM) and finite difference (FDM) methods to solve the 2D steady-state heat equation, which uses the following equation: $$-k\nabla^2u(x,y)=q(x,y)$$
 where $k$ is the thermal conductivity, $u(x,y)$ is the temperature of the material at location $(x,y)$, and $q(x,y)$ is the heat source. The heat source is defined by $$q(x,y)=-k(2+2\alpha),$$ where $\alpha$ is a specified constant.
 
 The problem will be solved for a square domain with dimensions $[0,1]\times[0,1]$, and the boundary conditions are $$u_\text{D}(x,y)=xy\cos(4x)\cos(4y).$$ 
@@ -23,6 +23,16 @@ The assumptions for solving the heat equation are:
 <p align="center">
   <img src="https://github.com/emily-nguyen97/writing_samples/blob/main/Images/heatequation2dmesh.png" alt="drawing" width="600"/>
 </p>
+
+## Software Dependencies
+
+The FEM code has the following dependencies:
+- FEniCS: A library for solving partial differential equations using the finite element method.
+- Matplotlib: A library for creating visualizations in Python.
+
+The FDM code has the following dependencies:
+- NumPy: A library for performing numerical computations with support for arrays.
+- Matplotlib: A library for creating visualizations in Python.
 
 ## Set Up Environment (for WSL)
 
@@ -92,12 +102,19 @@ Running `jupyter notebook` creates one HTML file path and two URLs. Copy and pas
 
 ### Solve the Heat Equation with the Finite Element Method
 
+The parameters are:
+- k: Thermal conductivity.
+- alpha: Specified constant.
+- nx: Number of grid points along the x-direction.
+- ny: Number of grid points along the y-direction.
+
 <details>
 <summary>The full code for solving the heat equation using the finite element method:</summary>
 
+#### Step 1: Import libraries and set up parameters.
+
 ```python
 from fenics import *
-import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib import cm
 
@@ -106,6 +123,8 @@ k = 0.1
 alpha = 3
 nx, ny = 100,100
 ```
+
+#### Step 2: Set up the mesh, function space, and boundary conditions.
 
 ```python
 # Create mesh and define function space
@@ -122,7 +141,11 @@ def boundary(x, on_boundary):
 
 # Set boundary conditions
 bc = DirichletBC(V, u_D, boundary)
+```
 
+#### Step 3: Define the variational problem that we will solve.
+
+```
 # Define variational problem
 u = TrialFunction(V)
 v = TestFunction(V)
@@ -133,11 +156,15 @@ a, L = lhs(F), rhs(F)
 
 ```
 
+#### Step 4: Solve the variational problem user the FEniCS solver.
+
 ```python
 # Solve
 u = Function(V)
 solve(a == L, u, bc)
 ```
+
+#### Step 5: Plot and save the temperature distribution visualization.
 
 ```python
 # Add a function for triangulating the solution given by FEniCS
@@ -167,8 +194,17 @@ The solution for the finite element method looks like:
 
 ### Solve the Heat Equation with the Finite Difference Method
 
+The parameters are:
+- num_steps: Number of discretized steps in the x and y-directions.
+- dx: Grid spacing.
+- n: Dimension for the matrix A and vector b.
+- k: Thermal conductivity.
+- alpha: Specified constant.
+
 <details>
 <summary>The full code for solving the heat equation using the finite difference method:</summary>
+
+#### Step 1: Import libraries and set up parameters.
 
 ```python
 import numpy as np
@@ -181,11 +217,17 @@ dx = 1.0/num_steps
 n = (num_steps+1)*(num_steps+1)
 k = 0.1
 alpha = 3
+```
 
+#### Step 2: Define the boundary conditions.
+
+```
 # Boundary is u(x,y) = xycos(4x)cos(4y)
 def bc(x, y):
     return x*y*np.cos(4*x)*np.cos(4*y)
 ```
+
+#### Step 3: Construct matrix $A$ according to the FDM scheme.
 
 ```python
 # Set up matrix A
@@ -211,6 +253,8 @@ for i in range(1,nx-1):
         A[i+j*nx,i+j*nx-nx] = 1.0
         A[i+j*nx,i+j*nx+nx] = 1.0
 ```
+
+#### Step 4: Construct vector $b$ according to the FDM scheme.
 
 ```python
 # Set up vector b
@@ -251,9 +295,13 @@ for i in range(1,nx-1):
         b[idx] = factor*sourceval
 ```
 
+#### Step 5: Solve $Au=b$ for the solution $u$.
+
 ```python
 sol = np.linalg.solve(A,b)
 ```
+
+#### Step 6: Plot and save the temperature distribution visualization.
 
 ```python
 # Set up mesh for plotting
